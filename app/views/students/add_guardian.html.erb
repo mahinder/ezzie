@@ -1,0 +1,150 @@
+<script>
+jQuery(function() {
+		jQuery( '#datepicker' ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar.gif",
+			buttonImageOnly: true
+		});
+	});
+</script>
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<div id="content-header">
+ <%= image_tag("admission/admission_page_logo.jpg") %>
+  <h1>Admission</h1>
+  <h3>Add guardian details</h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+
+
+  <%= form_for :parent_detail , :url => {:action=> 'add_guardian', :id =>@student.id} do |s| %>
+
+    <div id="admission1_form">
+
+
+
+      <div class="label-field-pair">
+        <label for="parent_detail_student_id">Student Admission no.</label>
+        <div class="text_display"><%= @student.admission_no %></div>
+        <%= s.hidden_field :ward_id, :value => @student.id %>
+      </div>
+      <br/>
+      <span class="span-sub-heading">Parent - Personal Details</span>
+      <hr class="sub-heading"></hr>
+
+      <div class="label-field-pair">
+      	<%= s.label :first_name %><span class="necessary-field">*</span>     
+        <%= s.text_field :first_name %>
+      </div>
+      <div class="label-field-pair">
+        <%= s.label :last_name %>
+        <%= s.text_field :last_name %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :relation %><span class="necessary-field">*</span>
+        <%= s.text_field :relation %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :date_of_birth %>     
+        <%= s.text_field :dob, :id => "datepicker" %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :education %>
+        <%= s.text_field :education %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :occupation %>
+        <%= s.text_field :occupation %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :income %>
+        <%= s.text_field :income %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :email %>
+        <%= s.text_field :email %>
+      </div>
+      <br/>
+      <span class="span-sub-heading">Parent - Contact Details</span>
+      <hr class="sub-heading"></hr>
+      <div class="label-field-pair">
+        <%= s.label :office_address_line1 %>      
+        <%= s.text_field :office_address_line1,:value=>@student.address_line1.to_s %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_address_line2 %>
+		<%= s.text_field :office_address_line2,:value=>@student.address_line2.to_s %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :city %>     
+        <%=  s.text_field :city,:value=>@student.city.to_s %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :state %>
+        <%= s.text_field :state,:value=>@student.state.to_s %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :country %>
+        <%= select :parent_detail, :country_id, @countries.map {|c| [c.name, c.id]}, :selected =>@student.country.id %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_phone1 %>
+        <%= s.text_field :office_phone1 %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_phone2 %>
+        <%= s.text_field :office_phone2 %>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :mobile_phone_no %>
+        <%= s.text_field :mobile_phone %>
+      </div>
+
+
+
+    </div>
+
+    <div class="extender">
+    </div>
+    <%= submit_tag "",  :name => "commit", :class => "submit_button3", :value => "► Finish" %>
+
+
+  <% end %>
+
+</div>

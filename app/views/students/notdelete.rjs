@@ -1,0 +1,1 @@
+page.alert 'Unable to Delete. this category has dependancy with students.'

@@ -1,0 +1,188 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <ul>
+      <% @employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :employee_number %><br />
+    <%= f.text_field :employee_number %>
+  </div>
+  <div class="field">
+    <%= f.label :joining_date %><br />
+    <%= f.date_select :joining_date %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.check_box :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :job_title %><br />
+    <%= f.text_field :job_title %>
+  </div>
+  <div class="field">
+    <%= f.label :reporting_manager_id %><br />
+    <%= f.number_field :reporting_manager_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qualification %><br />
+    <%= f.text_field :qualification %>
+  </div>
+  <div class="field">
+    <%= f.label :experience_detail %><br />
+    <%= f.text_area :experience_detail %>
+  </div>
+  <div class="field">
+    <%= f.label :experience_year %><br />
+    <%= f.number_field :experience_year %>
+  </div>
+  <div class="field">
+    <%= f.label :experience_month %><br />
+    <%= f.number_field :experience_month %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.check_box :status %>
+  </div>
+  <div class="field">
+    <%= f.label :status_description %><br />
+    <%= f.text_field :status_description %>
+  </div>
+  <div class="field">
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_select :date_of_birth %>
+  </div>
+  <div class="field">
+    <%= f.label :marital_status %><br />
+    <%= f.text_field :marital_status %>
+  </div>
+  <div class="field">
+    <%= f.label :children_count %><br />
+    <%= f.number_field :children_count %>
+  </div>
+  <div class="field">
+    <%= f.label :father_name %><br />
+    <%= f.text_field :father_name %>
+  </div>
+  <div class="field">
+    <%= f.label :mother_name %><br />
+    <%= f.text_field :mother_name %>
+  </div>
+  <div class="field">
+    <%= f.label :husband_name %><br />
+    <%= f.text_field :husband_name %>
+  </div>
+  <div class="field">
+    <%= f.label :blood_group %><br />
+    <%= f.text_field :blood_group %>
+  </div>
+  <div class="field">
+    <%= f.label :home_address_line1 %><br />
+    <%= f.text_field :home_address_line1 %>
+  </div>
+  <div class="field">
+    <%= f.label :home_address_line2 %><br />
+    <%= f.text_field :home_address_line2 %>
+  </div>
+  <div class="field">
+    <%= f.label :home_city %><br />
+    <%= f.text_field :home_city %>
+  </div>
+  <div class="field">
+    <%= f.label :home_state %><br />
+    <%= f.text_field :home_state %>
+  </div>
+  <div class="field">
+    <%= f.label :home_country_id %><br />
+    <%= f.number_field :home_country_id %>
+  </div>
+  <div class="field">
+    <%= f.label :home_pin_code %><br />
+    <%= f.text_field :home_pin_code %>
+  </div>
+  <div class="field">
+    <%= f.label :office_address_line1 %><br />
+    <%= f.text_field :office_address_line1 %>
+  </div>
+  <div class="field">
+    <%= f.label :office_address_line2 %><br />
+    <%= f.text_field :office_address_line2 %>
+  </div>
+  <div class="field">
+    <%= f.label :office_state %><br />
+    <%= f.text_field :office_state %>
+  </div>
+  <div class="field">
+    <%= f.label :office_city %><br />
+    <%= f.text_field :office_city %>
+  </div>
+  <div class="field">
+    <%= f.label :office_country_id %><br />
+    <%= f.number_field :office_country_id %>
+  </div>
+  <div class="field">
+    <%= f.label :office_pin_code %><br />
+    <%= f.text_field :office_pin_code %>
+  </div>
+  <div class="field">
+    <%= f.label :office_phone1 %><br />
+    <%= f.text_field :office_phone1 %>
+  </div>
+  <div class="field">
+    <%= f.label :office_phone2 %><br />
+    <%= f.text_field :office_phone2 %>
+  </div>
+  <div class="field">
+    <%= f.label :mobile_phone %><br />
+    <%= f.text_field :mobile_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :home_phone %><br />
+    <%= f.text_field :home_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :fax %><br />
+    <%= f.text_field :fax %>
+  </div>
+  <div class="field">
+    <%= f.label :photo_file_name %><br />
+    <%= f.text_field :photo_filenamecreate %>
+  </div>
+  <div class="field">
+    <%= f.label :photo_content_type %><br />
+    <%= f.text_field :photo_content_type %>
+  </div>
+  <div class="field">
+    <%= f.label :photo_data %><br />
+    <%= f.text_field :photo_data %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

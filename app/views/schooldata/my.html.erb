@@ -1,0 +1,17 @@
+	<script type="text/javascript">
+$(function() {
+  $('.datePicker').each(function() {
+    $(this).datepicker();
+  });
+});
+</script>
+<%= form for(f)%>
+<div class ="fields">
+  <%= f.select(:assessmethods_id,@types,:include_blank=>true) %>  
+  <%= f.text_field(:assessdate,:class => "datePicker") %>
+  <%= link_to_remove_fields("remove", f) %>
+</div>
+
+
+	
+

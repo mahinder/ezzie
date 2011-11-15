@@ -1,0 +1,17 @@
+<%= form_for(@archived_employee) do |f| %>
+  <% if @archived_employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@archived_employee.errors.count, "error") %> prohibited this archived_employee from being saved:</h2>
+
+      <ul>
+      <% @archived_employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

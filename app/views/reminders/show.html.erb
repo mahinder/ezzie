@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sender:</b>
+  <%= @reminder.sender %>
+</p>
+
+<p>
+  <b>Recipient:</b>
+  <%= @reminder.recipient %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @reminder.subject %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @reminder.body %>
+</p>
+
+<p>
+  <b>Is read:</b>
+  <%= @reminder.is_read %>
+</p>
+
+<p>
+  <b>Is deleted by sender:</b>
+  <%= @reminder.is_deleted_by_sender %>
+</p>
+
+<p>
+  <b>Is deleted by recipient:</b>
+  <%= @reminder.is_deleted_by_recipient %>
+</p>
+
+
+<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
+<%= link_to 'Back', reminders_path %>

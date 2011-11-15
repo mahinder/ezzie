@@ -1,0 +1,105 @@
+<h1>Listing employees</h1>
+
+<table>
+  <tr>
+    <th>Employee number</th>
+    <th>Joining date</th>
+    <th>First name</th>
+    <th>Middle name</th>
+    <th>Last name</th>
+    <th>Gender</th>
+    <th>Job title</th>
+    <th>Reporting manager</th>
+    <th>Qualification</th>
+    <th>Experience detail</th>
+    <th>Experience year</th>
+    <th>Experience month</th>
+    <th>Status</th>
+    <th>Status description</th>
+    <th>Date of birth</th>
+    <th>Marital status</th>
+    <th>Children count</th>
+    <th>Father name</th>
+    <th>Mother name</th>
+    <th>Husband name</th>
+    <th>Blood group</th>
+    <th>Home address line1</th>
+    <th>Home address line2</th>
+    <th>Home city</th>
+    <th>Home state</th>
+    <th>Home country</th>
+    <th>Home pin code</th>
+    <th>Office address line1</th>
+    <th>Office address line2</th>
+    <th>Office state</th>
+    <th>Office city</th>
+    <th>Office country</th>
+    <th>Office pin code</th>
+    <th>Office phone1</th>
+    <th>Office phone2</th>
+    <th>Mobile phone</th>
+    <th>Home phone</th>
+    <th>Email</th>
+    <th>Fax</th>
+    <th>Photo file name</th>
+    <th>Photo content type</th>
+    <th>Photo data</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @employees.each do |employee| %>
+  <tr>
+    <td><%= employee.employee_number %></td>
+    <td><%= employee.joining_date %></td>
+    <td><%= employee.first_name %></td>
+    <td><%= employee.middle_name %></td>
+    <td><%= employee.last_name %></td>
+    <td><%= employee.gender %></td>
+    <td><%= employee.job_title %></td>
+    <td><%= employee.reporting_manager_id %></td>
+    <td><%= employee.qualification %></td>
+    <td><%= employee.experience_detail %></td>
+    <td><%= employee.experience_year %></td>
+    <td><%= employee.experience_month %></td>
+    <td><%= employee.status %></td>
+    <td><%= employee.status_description %></td>
+    <td><%= employee.date_of_birth %></td>
+    <td><%= employee.marital_status %></td>
+    <td><%= employee.children_count %></td>
+    <td><%= employee.father_name %></td>
+    <td><%= employee.mother_name %></td>
+    <td><%= employee.husband_name %></td>
+    <td><%= employee.blood_group %></td>
+    <td><%= employee.home_address_line1 %></td>
+    <td><%= employee.home_address_line2 %></td>
+    <td><%= employee.home_city %></td>
+    <td><%= employee.home_state %></td>
+    <td><%= employee.home_country_id %></td>
+    <td><%= employee.home_pin_code %></td>
+    <td><%= employee.office_address_line1 %></td>
+    <td><%= employee.office_address_line2 %></td>
+    <td><%= employee.office_state %></td>
+    <td><%= employee.office_city %></td>
+    <td><%= employee.office_country_id %></td>
+    <td><%= employee.office_pin_code %></td>
+    <td><%= employee.office_phone1 %></td>
+    <td><%= employee.office_phone2 %></td>
+    <td><%= employee.mobile_phone %></td>
+    <td><%= employee.home_phone %></td>
+    <td><%= employee.email %></td>
+    <td><%= employee.fax %></td>
+    <td><%= employee.photo_filenamecreate %></td>
+    <td><%= employee.photo_content_type %></td>
+    <td><%= employee.photo_data %></td>
+    <td><%= link_to 'Show', employee %></td>
+    <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+    <td><%= link_to 'Destroy', employee, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Employee', :controller => 'user', :action => 'create'  %>

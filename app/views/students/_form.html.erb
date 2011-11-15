@@ -1,0 +1,247 @@
+<script>
+jQuery(function() {
+		jQuery( '#datepicker' ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar.gif",
+			buttonImageOnly: true
+		});
+	});
+</script>
+<script>
+jQuery(function() {
+		jQuery( '#datepicker1' ).datepicker({
+			showOn: "button",
+			buttonImage: "/images/calendar.gif",
+			buttonImageOnly: true
+		});
+	});
+</script>
+<div id="content-header">
+ <%= image_tag("admission/admission_page_logo.jpg") %>
+  <h1>Admission</h1>
+  <h3>Step 1 - Student details</h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% if @config.config_value == '0' %>
+    <% if @last_admitted_student.nil? %>
+      <p class="flash-msg">No student has been admitted yet </p>
+    <% else %>
+      <p class="flash-msg">Admission no. of last student is <%= @last_admitted_student.admission_no %> </p>
+    <% end %>
+  <% end %>
+
+<% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+<%= form_for(@student, :url => {:action=> 'create'} ,:html=> {:multipart=>true}) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="errorExplanation", class="errorExplanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div id="page-yield">
+  <div id="admission1_form">
+
+  <div id="necessary-field-notification"> Fields marked with <span class="necessary-field">*</span> must be filled.</div>
+
+  <div id="autofill-area">
+  	<div class="student_admission_date">
+  	<div class="text-input-bg-admission">
+    	<%= f.label :admission_no %><span class="necessary-field">*</span>
+            <% unless @config.config_value == '0' or @last_admitted_student.nil? %>
+              <%= f.text_field :admission_no , :value=> @student.admission_no || @last_admitted_student.admission_no.next%>
+            <% else %>
+              <%= f.text_field :admission_no %>
+            <% end %>
+  	</div>
+	</div>
+	<div class="student_admission_date">
+  	<div class="text-input-bg-admission">
+    	<%= f.label :admission_date %><span class="necessary-field">*</span> 
+    	<%= f.text_field :admission_date, :id => "datepicker" %>
+  	</div>
+  </div>
+   </div>
+   <span class="span-sub-heading">Personal Details</span>
+   <hr class="sub-heading"></hr>
+      
+  <div class="label-field-pair">
+    <%= f.label :first_name %><span class="necessary-field">*</span>
+    <%= f.text_field :first_name %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :middle_name %>
+    <%= f.text_field :middle_name %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :last_name %><span class="necessary-field">*</span>
+    <%= f.text_field :last_name %>
+  </div>
+  <hr class="label-underline"></hr>
+   <div id="admission1_form_vertical_block_left">
+
+   <div class="label-field-pair">
+      <%= f.label :course_and_batch %>
+      <div class="text-input-bg"><%= select :student, :batch_id, Batch.all.map {|b| [b.full_name, b.id]} %></div>
+    </div>
+    <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :date_of_birth %><span class="necessary-field">*</span>
+    <%= f.text_field :date_of_birth, :id => "datepicker1" %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :gender %>
+    <%= f.radio_button :gender, "m", :checked => "checked" %>Male<%= f.radio_button :gender, "f" %>Female
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :blood_group %>
+    <div class="text-input-bg"><%= select :student, :blood_group, ["Unknown","A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"], { :prompt => 'Select Blood Group' } %></div>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :birth_place %>
+    <%= f.text_field :birth_place %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :nationality_id %>
+    <div class="text-input-bg"><%= select :student, :nationality_id, Country.all.map {|c| [c.name, c.id]}, :selected=> @student.nationality_id || 76 %></div>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :language %>
+    <%= f.text_field :language %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :student_category_id %>
+    <div class="text-input-bg"><%= f.select :student_category_id, StudentCategory.all.map {|c| [c.name, c.id]}, { :prompt => 'Select category' } %></div>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :religion %>
+    <%= f.text_field :religion %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div id="admission1_form_vertical_block_right">
+     <span class="span-sub-heading">Contact Details</span>
+     <hr class="sub-heading"></hr>
+  <div class="label-field-pair">
+    <%= f.label :address_line1 %>
+    <%= f.text_field :address_line1 %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :address_line2 %>
+    <%= f.text_field :address_line2 %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :state_id%>
+    <div class="text-input-bg"><%= select :student, :state_id, CountryState.all.map {|c| [c.name, c.id]}, :selected=> @student.state_id %></div>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :pin_code %>
+    <%= f.text_field :pin_code %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :country_id %>
+    <div class="text-input-bg"><%= select :student, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected=> @student.country_id ||76 %></div>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :phone1 %>
+    <%= f.text_field :phone1 %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :phone2 %>
+    <%= f.text_field :phone2 %>
+  </div>
+  <hr class="label-underline"></hr>
+  <div class="label-field-pair">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <hr class="label-underline"></hr>
+  <script>
+          (function($){
+          	jQuery.fn.filestyle=function(options){
+          		var settings={width:250};
+          		if(options){
+          			jQuery.extend(settings,options);
+          			};
+          			return this.each(function(){
+          				var self=this;
+          				var wrapper=jQuery("<div>").css({"width":settings.imagewidth+"px",
+          				"height":settings.imageheight+"px",
+          				"background":"url("+settings.image+") 0 0 no-repeat",
+          				"background-position":"right","display":"inline",
+          				"position":"absolute",
+          				"overflow":"hidden"});
+          				var filename=jQuery('<input class="file">').addClass($(self).attr("class")).css({"display":"inline",
+          				"width":settings.width+"px"
+          				});
+          				jQuery(self).before(filename);
+          				jQuery(self).wrap(wrapper);
+          				jQuery(self).css({"position":"relative",
+          				"height":settings.imageheight+"px",
+          				"width":settings.width+"px",
+          				"display":"inline",
+          				"cursor":"pointer",
+          				"opacity":"0.0"
+          				});
+          				if(jQuery.browser.mozilla){
+          					if(/Win/.test(navigator.platform)){
+          						jQuery(self).css("margin-left","-142px");
+          						}else{
+          							jQuery(self).css("margin-left","-168px");
+          							};
+          							}else{
+          								jQuery(self).css("margin-left",
+          								settings.imagewidth-settings.width+"px");
+          								};
+          								jQuery(self).bind("change",function(){
+          									filename.val($(self).val());
+          									});
+          									});
+          									};
+          									})
+          									(jQuery);
+  </script>
+  <span class="span-sub-heading">Upload User Photo</span>
+  <hr class="sub-heading"></hr>
+  <div class="label-field-pair">
+  	<%= f.label :Upload_User_Photo %>
+    <%= f.file_field :image_file %>
+  </div>
+<hr class="label-underline"></hr>
+  <div class="extender">
+
+  </div>
+  </div>
+  <div class="action">
+    <%= f.submit :value => '► Save & Proceed ', :class => 'submit_button' %>
+  </div>
+<% end %>
+</div>

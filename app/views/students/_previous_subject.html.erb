@@ -1,0 +1,20 @@
+
+<span class="span-sub-heading">Subject Details</span>
+<%= form_for :student_previous_subject_details ,:url =>{:action =>'save_previous_subject'}, :remote => true do |s| %>
+<%= s.hidden_field :student_id, :value => @student.id %>
+<div class="label-field-pair">
+  <%= s.label :subject %>
+  <%= s.text_field :subject %>
+  <div class="extender"></div>
+</div>
+<div class="label-field-pair">
+  <%= s.label :mark %>
+  <%= s.text_field :mark %>
+  <div class="extender"></div>
+</div>
+<div class="save-proceed-button" id="save-proceed-button">
+      <%= s.submit "► Save"%>
+    </div>
+
+<% end %>
+

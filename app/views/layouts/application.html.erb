@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fedena</title>
+		<%= stylesheet_link_tag    "rails","header_top","jquery-ui-1.8.16.custom" %>
+		<%= stylesheet_link_tag    "application.css","student/admission1.css","student/admission2.css","student/admission3.css","student/admission4.css","student/admission3_1.css","student/guardians.css" ,"student/previous_data.css","student/previous_data_edit.css","student/profile.css","student/index.css" %>
+
+		<%= stylesheet_link_tag "popup.css","_styles/ui.all","student/show_previous_details.css","student/edit.css","student/add_additional_details.css"%>
+		<%= stylesheet_link_tag "modalbox","news/index.css","student/view_all.css","user/index.css","user/profile.css","employee"%>
+		<%= stylesheet_link_tag "student/advanced_search.css","finance/index.css","finance/categories","finance/donation_receipt.css" %>
+		<%= stylesheet_link_tag "news/add.css","news/all.css","news/edit.css","news/index.css","news/view.css" %>
+		<%= stylesheet_link_tag "finance/expense_create.css","finance/fee_discount_new.css","finance/add_particulars.css" %>
+		<%= stylesheet_link_tag "modalbox","news/index.css","student/view_all.css","user/index.css","user/profile.css","employee/profile.css"%>
+		<%= javascript_include_tag :all, :recursive => true %>
+		<%= stylesheet_link_tag "timetable/timetable.css","timetable/select_class2.css","timetable/edit2.css","timetable/select_class2.css"%>
+		<%= stylesheet_link_tag "exams/create.css","exams/new.css","exams/edit.css","exams/show.css","exams/update.css" %>
+		<%= stylesheet_link_tag "exam_groups/create.css","exam_groups/new.css","exam_groups/edit.css","exam_groups/show.css" %>
+		<%= stylesheet_link_tag "exam/create.css","exam/create_exam.css","exam/create_examtype.css","exam/edit.css","exam/timetable.css","exam/select_class.css" %>
+		<%= csrf_meta_tags %>
+
+		<%= javascript_include_tag :defaults%>
+		<%= javascript_include_tag 'jquery-1.6.2.min' %>
+		<%= javascript_include_tag 'jquery-ui-1.8.16.custom.min' %>
+		<%= javascript_include_tag "modalbox"%>
+		<%= calendar_date_select_includes 'red' %>
+		<script type="text/javascript">
+			jQuery.noConflict();
+
+		</script>
+		<script type="text/javascript">
+/***********************************************
+* Dynamic Countdown script- © Dynamic Drive (http://www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+var anylinkmenu1={divclass:'anylinkmenu', inlinestyle:'', linktarget:''} //First menu variable. Make sure "anylinkmenu1" is a unique name!
+anylinkmenu1.items = [
+["Calendar", "/calendar"],
+["Examination", "/exam"],
+["News", "/news"],
+["Event Creation", "/event"],
+["Human Resource", "/employee/hr"],
+["Finance", "/finance/index"],
+["Users", "/user"],
+]
+anylinkmenu.init("menuanchorclass");
+		</script>
+	</head>
+	<body>
+	 <div id="header_bg">
+      <div id="header">
+        <div id="main-menu">
+          <%= link_to "Dashboard", :controller => "users", :action => "dashboard" %>
+          <% this_user = User.find(session[:user_id]) if session[:user_id] %>
+          <%  if this_user.student? || this_user.employee? %>
+            <%= link_to "Calendar", :controller => "calendar" %>
+          <% end %>
+          <%= link_to "Students", :controller => "students", :action => "index" \
+            if this_user.admin? %>
+          <%= link_to "Attendance", :controller => "student_attendance", :action => "index" \
+            if this_user.admin? %>
+          <%= link_to "Settings", :controller => "schooldata", :action => "index" \
+            if this_user.admin? %> <!--
+          <%= link_to "News", :controller => "news", :action => "index" \
+            if this_user.admin? %> -->
+          <%= link_to "Timetable", :controller => "timetable", :action => "index" \
+            if this_user.admin? %>
+          <% if this_user.admin? %>
+            <a href="#" class="menuanchorclass" rel="anylinkmenu1">More ▼</a>
+          <% end %>
+
+        </div>
+        <div id="header_link" >
+          Logged in as:
+          <%= link_to this_user.first_name, :controller => 'users', :action => 'profile',
+            :id => this_user.username %> &nbsp;|&nbsp;
+          <%= link_to "Messages",:controller => "reminder", :action => "index" %>(<%= render :partial => 'layouts/reminder_count' %>)&nbsp;|&nbsp;
+          <%= link_to 'Log out', :controller => 'users', :action => 'logout'  %>  &nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+
+    <div id="content_wrapper" >
+      <div id="side_bar">
+
+        <div id="sidebar_news_area">
+          <% if action_name == "dashboard" %>
+            <%= link_to " ", { :controller => "news", :action => "index" }, :id => 'news_feed_top_img' %>
+            <div id="news_feed">
+              <% @dash_news.each do |n| %>
+                <div class="sidebar_news_item<%= cycle("0", "1") %>">
+                  <h5><%= link_to n.title, :controller => 'news', :action => 'view', :id => n.id %></h5>
+                  <small><%= time_ago_in_words(n.created_at) %> ago</small>
+                </div>
+              <% end %>
+              <div class="extender"> </div>
+              <%= link_to image_tag("fedena_user/dashboard/news_feed_more_link.jpg", :border => 0), {:controller => "news", :action => "all"} %>
+            </div>
+          <% end %>
+        </div>
+      </div>      <div id="content"> <%= yield %> </div>
+
+      <div class="extender"></div>
+    </div>
+    
+    <div id="footer">
+      <div id="footer_logo">
+        <div id="powered_by">
+          Powered by <a href="http://ezzie.in/" target="_blank">Ezzie Infosystems</a>
+        </div>
+        <a href="http://ezzie.in/" target="_blank" class="footer-logo"></a>
+      </div>
+    </div>
+	</body>
+</html>

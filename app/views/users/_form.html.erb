@@ -1,0 +1,53 @@
+ 
+ <div id="content-header">
+  <%= image_tag("user_profile/user_profile_logo.jpg") %>
+  <h1>Create User</h1>
+  <h3>Make new user</h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+<%= form_for(@user,:url =>{:action => 'create'}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div id="create_user_form">
+  <div class="label-field-pair">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :password %><br />
+    <%= f.text_field :hashed_password %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :role %><br />
+   <%= select :user, :role,
+            ['Admin', 'Employee'] %> 
+  </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

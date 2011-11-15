@@ -1,0 +1,21 @@
+<h1>Listing archived_employees</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @archived_employees.each do |archived_employee| %>
+  <tr>
+    <td><%= link_to 'Show', archived_employee %></td>
+    <td><%= link_to 'Edit', edit_archived_employee_path(archived_employee) %></td>
+    <td><%= link_to 'Destroy', archived_employee, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Archived employee', new_archived_employee_path %>
